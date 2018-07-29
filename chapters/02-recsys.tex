@@ -1,0 +1,173 @@
+\chapter{Sistemas de Recomendação}
+\label{chp:recSys}
+
+\begin{quotation}[]{Autor Desconhecido}
+Discipline is doing what you know needs to be done, even if you don't want to do it.
+\end{quotation}
+
+A grande quantidade de informação produzida e disponibilizada atualmente pode gerar uma sobrecarga para o usuário. Por causa deste problema, muitas tecnologias surgiram para apoiar a seleção, recuperação e filtragem da informação de interesse do usuário. Este capítulo fornece uma visão geral sobre Sistemas de Recomendação, introduz os principais conceitos em sistemas de recomendação, as tarefas e técnicas que a caracterizam. \newline
+
+\section{Histórico}
+\label{sec:historyRecSys}
+
+Os primeiros sistemas de recomendação foram tradicionais sistemas de filtragem e recuperação da informação, os quais não podiam recomendar mais do que certos resultados de acordo com a pesquisa. O primeiro sistema de recomendação foi um sistema experimental de filtragem de e-mail: \textit{Tapestry} \citep{Goldberg:1992:UCF:138859.138867}, desenvolvido por pesquisadores da \textit{Xerox Palo Alto Research Center}. A motivação para o \textit{Tapestry} veio do aumento do número de e-mails que chegavam no centro de pesquisa \citep{Resnick:1997:RS:245108.245121}. \textit{Tapestry} foi elaborado para lidar com filtragem colaborativa - sendo os primeiros a usar o termo - e filtragem baseada em conteúdo. A parte colaborativa do sistema filtra e arquiva os e-mails de acordo com as reações das pessoas que já tinham lido.
+
+Em sua forma mais simples, recomendações personalizadas são fornecidas como listas de itens classificados. Para gerar essa lista, sistemas de recomendação tentam predizer qual produto ou serviço mais se encaixa, baseado nas preferências do usuário. Para isso, eles coletam as preferências do usuário que podem ser expressas explicitamente. Por exemplo, avaliando produtos ou realizando inferências a partir das ações do usuário, o sistema pode considerar um acesso à página de um produto como um sinal implícito de preferência \citep{Ricci:2010:RSH:1941884}.
+
+As pessoas frequentemente dependem de recomendações. seja através de recomendação de amigos, \textit{reviews} de livros e filmes, ou guias de restaurantes. O sistema de recomendação apoia e aumenta esse processo natural \citep{Resnick:1997:RS:245108.245121}. Basicamente, sistemas de recomendação são técnicas e ferramentas de software para fornecer sugestões de itens que sejam úteis para um usuário. Nesses sistemas, \quotes{item} é um termo genérico utilizado para denotar o que o sistema recomenda a um usuário \citep{Ricci:2010:RSH:1941884}.
+
+Sistemas de recomendação são largamente utilizados no comércio eletrônico, entretenimento, consumo de conteúdo, indústria de serviço, entre outros. Esses podem ser encontrados em muitas aplicações modernas que entregam ao usuário uma enorme coleção de itens, recomendando itens ao usuário final utilizando uma combinação de abordagens baseada em conteúdo, filtragem colaborativa e em conhecimento \citep{Ricci:2010:RSH:1941884}. Por exemplo, o serviço de \textit{streaming} de filmes \textit{Netflix}\footnote{https://www.netflix.com} exibe predições de classificação para cada filme exibido, ajudando o usuário a decidir qual filme assistir. A loja online \textit{Amazon}\footnote{http://www.amazon.com/} fornece, na página de um produto, informações de outros produtos comprados por usuários que compraram aquele produto \citep{evaluating-recommender-systems}.
+
+Com o rápido crescimento da quantidade de informação disponível na Web, que frequentemente sobrecarregam o usuário, são tomadas decisões pobres ou erradas. Assim a disponibilidade de escolhas, ao invés de ser um benefício, acaba sendo um problema para o usuário \citep{Ricci:2010:RSH:1941884}. Os sistemas de recomendação oferecem novos itens não visitados anteriormente como produtos, filmes, livros, páginas web, etc, baseados nas preferências do usuário mantidas em seu perfil. Os sistemas de recomendação lidam com esse problema de sobrecarga de informação filtrando itens que podem corresponder aos interesses do usuário. Eles ajudam os usuários filtrando informações irrelevantes quando os usuários pesquisam por alguma informação de interesse \citep{DBLP:journals/corr/abs-1109-0166}.
+
+Critérios como \quotes{individualizada} e \quotes{interessante e útil} diferenciam o sistema de recomendação dos sistemas de recuperação de informação ou motores de busca. Em um motor de busca, o sistema deve retornar tudo o que for correspondente a um termo de pesquisa. Porém, motores de buscas começaram a utilizar técnicas como \ac{rr} (em inglês, \textit{Relevance Feedback} - RF) para introduzir o usuário no processo da busca, permitindo que os mesmos indiquem o que é realmente relevante \citep{Burke2002}.
+
+\section{Conceitos}
+\label{sec:conceptsRecSys}
+
+Os dados utilizados pelo sistema de recomendação podem se referir a três tipos de objetos: itens, usuários e relações \citep{Ricci:2010:RSH:1941884}.
+
+\begin{itemize}
+	\item{\textbf{Itens}: Itens são os objetos recomendados. Podem ser caracterizados por sua complexidade e por seu valor ou utilidade. O valor de um item pode ser positivo se o item é útil para o usuário, ou negativo se o item é inapropriado e o usuário tomou uma decisão errada ao selecioná-lo. Itens podem ser representados utilizando várias abordagens de representação e informação.}
+	
+	\item{\textbf{Usuários}: Os usuários do sistema de recomendação podem ter diversos objetivos e características. Para personalizar as recomendações os sistemas de recomendação exploram um conjunto de informações sobre o usuário. Essas informações podem ser estruturadas de várias maneiras, e a seleção de quais informações modelar depende da técnica de recomendação. Usuários também podem ser descritos pelo seus padrões de comportamento, como dados de navegação em um site.}
+	
+	\item{\textbf{Transações}: Transações são registros de interação entre o usuário e o sistema de recomendação. São como dados de log que armazenam informações importantes geradas durante a interação humano-computador, as quais são úteis para geração de recomendação pelo algoritmo que o sistema está utilizando.}
+\end{itemize}
+
+\section{Tarefas de um Sistema de Recomendação}
+\label{sec:tasksRecSys}
+
+\cite{Ricci:2010:RSH:1941884} apresentou uma lista das tarefas de um sistema de recomendação baseada nos interesses do criador do sistema de recomendação.
+
+\begin{itemize}
+	\item{\textbf{Aumentar o número de itens vendidos}: Essa é, provavelmente, a função mais importante para um sistema de recomendação comercial. Ele deve ser capaz de vender um conjunto de itens adicionais comparado a aqueles que venderiam sem qualquer tipo de recomendação.}
+	
+	\item{\textbf{Vender mais itens diferentes}: Outra função importante de um sistema de recomendação é possibilitar que o usuário encontre itens que seriam difícil de encontrar sem uma recomendação precisa.}
+	
+	\item{\textbf{Aumentar a satisfação do usuário}: Uma combinação de recomendações precisas e uma interface bem desenhada irão aumentar a avaliação subjetiva que o usuário tem do sistema. Isso irá aumentar a utilização do sistema e a probabilidade de as recomendações serem aceitas.}
+	
+	\item{\textbf{Aumentar a fidelidade do usuário}: Um usuário deve ser fiel a um site que reconhece-o como um cliente antigo e trata-o como um visitante de grande valor. Esse é um recurso comum em sistemas de recomendação, já que eles calculam recomendações avaliando as informações adquiridas do usuário em interações anteriores.}
+	
+	\item{\textbf{Melhor entendimento do que o usuário quer}: A descrição das preferências do usuário, coletadas explicitamente ou preditas pelo sistema, podem ser reutilizadas para vários objetivos.}		
+\end{itemize}
+
+\cite{Herlocker:2004:ECF:963770.963772} define onze tarefas de usuário que um sistema de recomendação pode auxiliar a implementar para apoiar o usuário em seus objetivos.
+
+\begin{itemize}
+	\item{\textbf{Anotação em contexto}: Dada uma lista de itens em um contexto, destacar alguns deles de acordo com as preferências do usuário.}
+		
+	\item{\textbf{Encontrar bons itens}: Fornecer ao usuário uma lista ranqueada dos itens recomendados, com uma previsão do quanto o usuário gostará desses itens.}
+	
+	\item{\textbf{Encontrar todos os bons itens}: Fornecer ao usuário uma lista de todos os itens que podem satisfazer suas necessidades. Em alguns casos encontrar apenas alguns bons itens pode não ser o suficiente. Na prática, o sistema tem que garantir ter uma taxa de "falso negativo"~ suficientemente baixa.}
+	
+	\item{\textbf{Recomendar uma sequência}: Aqui tem-se o desafio de recomendar uma sequência de itens relacionados.}
+	
+	\item{\textbf{Recomendar um grupo}: Recomendar um grupo de itens relacionados que possam interessar o usuário.}
+	
+	\item{\textbf{Apenas navegar}: O sistema deve auxiliar os usuários que apenas navegam sem um propósito definido, navegando entre os itens que possam ser interessantes naquela sessão específica.}
+	
+	\item{\textbf{Encontrar sistema de recomendação confiável}: Os usuários podem não confiar no sistema de recomendação, assim o sistema deve possibilitar que o usuário teste algumas funções.}
+	
+	\item{\textbf{Melhorar o perfil}: O sistema deve receber informações do usuário sobre o que ele gosta e não gosta. As contribuições do usuário aperfeiçoarão a qualidade das recomendações.}
+	
+	\item{\textbf{Expressar-se}: Alguns usuários não se importam com as recomendações, apenas estão interessados em contribuir com as qualificações. Assim, o sistema deve fornecer uma seção para comentários.}
+	
+	\item{\textbf{Ajudar os outros}: Alguns usuários gostam de contribuir com informação porque eles acreditam que a comunidade se beneficia de sua avaliação.}
+	
+	\item{\textbf{Influenciar os outros}: Existem ainda usuários maliciosos, que tentarão influenciar outros a escolher um determinado item, ou ainda utilizarão o sistema apenas para promover ou penalizar um item.}
+\end{itemize}
+
+\section{Técnicas de Recomendação}
+\label{sec:tecnicsRecSys}
+
+Para a realização da recomendação são utilizadas algumas técnicas baseadas em predições. Tais predições podem ser feitas a partir das informações de itens, ou de usuários.
+
+Várias técnicas de recomendação foram propostas como base para um sistema de recomendação, como as técnicas colaborativa, baseada em conteúdo, baseada em conhecimento e demográfica. As técnicas de recomendação podem ser diferenciadas com base em suas fontes de conhecimento, mas existe a indagação de qual a fonte do conhecimento necessário para fazer a recomendação. Em alguns sistemas, esse conhecimento é o conhecimento das preferências de outros usuários \citep{Burke2007}.
+
+A utilidade de um item para um usuário pode ser influenciada pelo conhecimento que o usuário tem do domínio, como um usuário iniciante comparado a um usuário experiente de uma câmera digital. O interesse do usuário pelo item também pode depender do momento em que a recomendação foi feita. Por exemplo, o usuário pode estar mais interessado em um restaurante mais perto de seu local atual. Assim, a recomendação deve ser adaptada para esses detalhes específicos adicionais \citep{Ricci:2010:RSH:1941884}.
+
+\cite{Burke2007} apresentou quatro diferentes classes de técnicas de recomendação baseadas em fontes de conhecimento, como ilustrado na Figura \ref{fig:recommendation_techniques_knowledge_sources}:
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.63]{images/recommendation_techniques_knowledge_sources.png}
+	\caption{Técnicas de recomendação e suas fontes de conhecimento \citep{Burke2007}.}
+	\label{fig:recommendation_techniques_knowledge_sources}
+\end{figure}
+
+\begin{itemize}
+	\item{\textbf{Filtragem Colaborativa}: O sistema gera recomendações para um usuário utilizando apenas informações de itens de outros usuários com gosto similar.}
+	
+	\item{\textbf{Baseada em Conteúdo}: O sistema gera recomendação de duas fontes: as características associadas ao item e as classificações que os usuários deram a ele.}
+	
+	\item{\textbf{Demográfica}: Fornece recomendações baseado no perfil demográfico do usuário.}
+	
+	\item{\textbf{Baseada em Conhecimento}: Sugere itens baseado em inferências sobre as preferências e necessidades do usuário.}
+\end{itemize}
+
+	A seguir é discutido em detalhes alguns dos tipos de recomendação.
+	
+\subsection{Filtragem Colaborativa}
+\label{subsec:cfRecSys}
+
+Na filtragem colaborativa o sistema recomenda ao usuário ativo itens que usuários com gostos similares gostaram no passado. A semelhança de gostos de dois usuários é calculada baseada na similaridade do histórico de classificações dos usuários. A filtragem colaborativa é considerada a técnica em sistemas de recomendação mais popular e mais largamente implementada \citep{Ricci:2010:RSH:1941884}.
+
+A ideia chave é que a classificação de um usuário \textit{u} para um novo item \textit{i} é provável de ser parecido para a de outro usuário \textit{v}, se \textit{u} e \textit{v} tem classificado outros itens de maneira equivalente. De modo similar, é provável que \textit{u} classifique dois itens \textit{i} e \textit{j} de forma semelhante, se outros usuários tem feito classificações similares para estes dois itens \citep{Ricci:2010:RSH:1941884}.
+
+Em \cite{Burke2002} e \cite{Burke2007}, tem-se que os métodos de filtragem colaborativa podem ser divididos nas duas classes gerais baseados em \textit{vizinhança} e \textit{modelo}. Na filtragem colaborativa baseada em vizinhança, as classificações usuário-item armazenadas no sistema são utilizadas diretamente para predizer classificações para novos itens. Isto pode ser feito de duas maneiras conhecidas como recomendação \textit{user-based} ou \textit{item-based} \citep{Ricci:2010:RSH:1941884}.
+
+Sistemas baseados em usuário, avaliam o interesse de um usuário \textit{u} por um item \textit{i} utilizando as classificações, para este item, de outros usuários, chamados \textit{vizinhos}, que tem padrões de classificação similar. Os vizinhos do usuário \textit{u} são tipicamente os usuários \textit{v} cujas classificações para os itens classificados por \textit{u} e \textit{v}, isto é I{$_{uv}$}, são mais correlacionados com aqueles de \textit{u}. A abordagem baseada no item, por outro lado, prediz a classificação de um usuário \textit{u} para um item \textit{i} baseado nas classificações de \textit{u} para itens similares a \textit{i}. Em tais abordagens, dois itens são similares se muitos usuários do sistema tem classificado estes itens de maneira similar \citep{Ricci:2010:RSH:1941884}.
+
+Diferente dos sistemas baseado em vizinhança, que usam as classificações armazenadas diretamente na predição, abordagens baseadas em modelo usam essas classificações para aprender um modelo preditivo. A ideia geral é modelar as interações usuário-item com fatores representando características latentes dos usuários e itens no sistema, como a classe de preferência do usuário e a classe de categoria dos itens. Este modelo é então treinado utilizando os dados disponíveis, e depois utilizado para predizer classificações de usuários para novos itens \citep{Ricci:2010:RSH:1941884}.
+
+\subsection{Filtragem Baseada em Conteúdo}
+\label{subsec:contextFilterRecSys}
+
+Sistemas de recomendação baseado em conteúdo tentam recomendar itens similares a aqueles que um usuário gostou no passado, ao passo que sistemas que utilizam o paradigma de recomendação colaborativa identificam usuários que possuem preferências similares a um usuário e recomenda itens que eles tem gostado \citep{Lops2011}.
+
+Sistemas implementando uma abordagem de recomendação baseada em conteúdo analisam um conjunto de documentos e/ou descrições de itens previamente classificados por um usuário, e constroem um modelo ou perfil de interesses do usuário baseado nas características dos objetos classificados por este usuário \citep{784084}. O perfil é uma representação estruturada dos interesses do usuário, adaptado para recomendar novos itens interessantes. O processo de recomendação consiste basicamente em combinar os atributos do perfil do usuário contra os atributos de um objeto de conteúdo. O resultado é um julgamento de relevância que representa os níveis de interesse do usuário naquele objeto. Se um perfil reflete com precisão as preferências do usuário, isso é uma grande vantagem para a eficácia no processo de acesso a informação. Por exemplo, um perfil pode ser utilizado para filtrar os resultados de pesquisa para decidir se um usuário está interessado em uma específica página Web ou não e, em caso negativo, prevenir de ser exibida \citep{Lops2011}.
+
+\subsection{Arquitetura de Sistemas de Recomendação Baseados em Conteúdo}
+\label{subsec:cb-recsys-architecture}
+
+Segundo \cite{Lops2011}, em sistemas baseados em conteúdo é necessário utilizar técnicas apropriadas para representar os itens e produzir o perfil do usuário, além de algumas estratégias para comparar o perfil do usuário com a representação do item. O processo de recomendação é realizado em três passos, cada qual é manipulado por um componente separado:
+
+\begin{itemize}
+	\item{\textbf{Analisador de Conteúdo}: Quando a informação não tem estrutura, como um texto, algum tipo de pré-processamento é preciso para extrair informação relevante e estruturada. A principal responsabilidade do componente é representar o conteúdo dos itens (por exemplo, documentos, páginas Web, notícias, descrição de produtos, etc.) vindos de fontes de informação de forma adequada para o próximo passo de processamento.}
+	
+	\item{\textbf{Aprendiz de Perfil}: Este módulo coleta dados representativos das preferências dos usuários e tenta generalizar estes dados, para construir o perfil do usuário. Normalmente, a estratégia de generalização é realizada através de técnicas de \textit{aprendizado de máquina}, que são capazes de inferir um modelo de interesses de usuário partindo de itens gostados ou não gostados no passado.}
+	
+	\item{\textbf{Componente de Filtragem}: Este módulo explora o perfil do usuário para sugerir itens relevantes através da combinação da representação do perfil do usuário contra os itens a serem recomendados. O resultado é um binário ou contínuo julgamento de relevância (computado utilizando alguma métrica de similaridade \citep{Herlocker:2004:ECF:963770.963772}), neste último caso resultando em uma lista ranqueada de itens potencialmente interessantes.}
+\end{itemize}
+
+A arquitetura de alto nível de um sistema de recomendação baseado em conteúdo está retratada na Figura \ref{fig:high_level_arch_content_based_rec_order}.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.88]{images/high_level_arch_content_based_rec_order.png}
+	\caption{Arquitetura de alto nível de um Sistema de Recomendação Baseado em Conteúdo \citep{Lops2011}.}
+	\label{fig:high_level_arch_content_based_rec_order}
+\end{figure} 
+
+
+\subsection{Comparação das Técnicas de Recomendação}
+\label{subs:compareRecTech}
+
+Todas as técnicas de recomendação tem seus pontos fortes e fracos. \cite{Burke2002} indicou alguns desses pontos, os quais são discutidos abaixo:
+
+\begin{itemize}
+	\item{\textbf{Usuário Novo}: Recomendações partem da comparação entre o usuário alvo e outros usuários baseando-se unicamente na acumulação de classificações. Dessa forma um usuário com poucas classificações é difícil de categorizar.}
+	
+	\item{\textbf{Item Novo}: Do mesmo modo, um item novo que não tem recebido muitas classificações também não pode ser facilmente recomendado: o problema do "item novo". É também conhecido como problema do "early rater", desde que a primeira pessoa a classificar um item recebe poucos benefícios por fazer isso. Isso torna necessário que sistemas de recomendação forneçam outros incentivos para encorajar usuários a fornecer classificações.}
+\end{itemize}
+
+Sistemas de recomendação colaborativos dependem das recomendações entre usuários e tem problemas quando o espaço de classificações é esparso, na qual poucos usuários classificam os mesmos itens. Estes problemas sugerem que técnicas colaborativas puras são melhores para problemas em que a densidade de interesse do usuário é relativamente alta entre um pequeno e estático universo de itens. Se o conjunto de itens muda rapidamente, classificações antigas serão de pouco valor para novos usuários que não serão capazes de ter suas classificações comparadas com as dos usuários existentes. Se o conjunto de itens é grande e o interesse do usuário dissemina pouco, então a probabilidade de sobreposição com outros usuários será pequena \citep{Burke2002}.
+
+Sistemas de recomendação colaborativos funcionam melhor para um usuário que se encaixa em um nicho com muitos vizinhos de gosto semelhante. A técnica não funciona bem para o chamado "\textit{gray sheep}"~ \citep{claypool99}, que cai na fronteira entre panelinhas de usuários existentes. Isso também é um problema para sistemas demográficos que tentam categorizar usuários em características pessoais. Por outro lado, sistemas de recomendação demográficos não tem o problema do "usuário novo", porque eles não requerem um lista de classificações dos usuários. Ao invés, eles tem o problema de reunir as informações demográficas necessárias. \citep{Burke2002}.
+
+
+\section{Sumário}
+\label{sec:summaryRecSys}
+
+Neste capítulo foi apresentado uma visão geral sobre os Sistemas de Recomendação. Primeiramente mostrando um histórico sobre Sistemas de Recomendação. Em seguida, é discutido alguns conceitos sobre os dados utilizados em um sistema, além das principais técnicas de recomendação. Então, foi apresentado uma lista de tarefas desempenhadas por sistemas de recomendação. No capítulo seguinte será discutido sobre Sistemas de Recomendação \textit{e-Tourism}, introduzido do que se trata, formas e requisitos de modelagem e algumas aplicações de sistemas de recomendação.

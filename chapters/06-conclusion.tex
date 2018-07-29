@@ -1,0 +1,44 @@
+\chapter{Conclusão}
+\label{chp:conclusion}
+
+Neste trabalho foi apresentado um sistema de recomendação de rotas de pontos turísticos. Inicialmente foi apresentado a motivação para a criação do sistema de recomendação, relatou-se alguns problemas que os turistas enfrentam para montar seu itinerários para as próximas viagens. Foi proposta uma solução para ajudar os usuários a encontrar pontos turísticos de sua preferência, usando um sistema de recomendação que gera uma rota para esses pontos.
+
+No Capítulo \ref{chp:recSys} descreve sobre os sistemas de recomendação,  apresentando um histórico, discussão de conceitos quanto aos dados que são utilizados em um sistema além das tarefas desempenhadas pelos sistemas de recomendação e as suas principais técnicas.
+
+No Capítulo \ref{chp:eTourism} apresentou-se sobre o setor turístico, mostrando os principais conceitos e descrevendo trabalhos relacionados a sistemas de recomendações com foco no turismo. Exemplificou sistemas que disponibilizam informações relacionadas ao turismo além de de como são classificadas os sistemas de recomendação para \textit{e-Tourism}.
+
+O Capítulo \ref{chp:eTourismRecSys} explica a proposta de solução para a recomendação de rotas de pontos turísticos para o turista. Foi apresentado os requisitos funcionais e não funcionais do software desenvolvido, a sua arquitetura e as tecnologias utilizadas. Esclarece todo o seu funcionamento para o usuário além de expor sobre os modelos do usuário e do item.
+
+Para finalizar, o sistema de recomendação foi apresentado em detalhes e realizou-se uma avaliação experimental. Os métodos de avaliação e os resultados foram apresentados, mostrando o êxito da proposta, ou seja, a recomendação de pontos turísticos de acordo com as preferências do turista e a geração da rota de acordo com o resultado. A seguir, menciona as contribuições principais deste trabalho e os trabalhos futuros.
+
+\section{Contribuição do Trabalho}
+
+As principais contribuições deste trabalho são explicados a seguir:
+
+\begin{itemize}
+    \item \textbf{Revisão de sistemas de recomendação voltadas ao turismo:} Neste projeto, desempenhou-se uma revisão de sistemas de recomendação focados na área do turismo, mostrando-se os trabalhos relacionados. Além disso, o estudo proporciona conhecer funcionalidades e diferentes tipos de sistemas de recomendação que poderiam ser utilizados em diferentes cenários para sugestão de pontos turísticos e construção de rotas.
+    
+    \item \textbf{Modelos de pontos de interesse:} Para testes, foram utilizados dois modelos de recomendação em cima dos itens disponíveis para o nosso sistema. No primeiro, mostra-se como as avaliações de outros usuários podem ajudar na recomendações de outros pontos turísticos. No segundo, classifica-se algumas informações úteis para as recomendações,. Todas as duas, focadas em uma recomendação de acordo com as preferências do turista.
+    
+    \item \textbf{Avaliações do Experimento:} Com o sistema de recomendação pronto, foram feitos testes para avaliar os dois modelos de recomendação. Foram realizados diversos testes, diferenciando os métodos de similaridade e os atributos do banco de dados dos itens. Fazendo uma comparação, é possível definir as condições de utilizar os modelos de recomendação e suas limitações.
+\end{itemize}
+
+\section{Trabalhos Futuros}
+
+Mesmo com os resultados, é possível melhorar ainda mais o sistema de recomendação e a geração de rotas das seguintes formas:
+
+\begin{itemize}
+    \item \textbf{Aumento na base de dados de itens e avaliações:} Verificou-se que a limitação de avaliações por itens impactou fortemente nos resultados. Enriquecer essa base, aumentando a quantidade de avaliações por locais e colocar outros pontos turísticos além da cidade de Salvador melhorará a recomendação para os dois modelos apresentados.
+    
+    \item \textbf{Inserir mais atributos para o usuário:} Acrescentando mais características do usuário, será possível refinar mais as recomendações. Será possível verificar quais são os tipos de pontos turísticos são mais visitados de acordo com o gênero, o país de origem ou a idade do turista.
+    
+    \item \textbf{Localização do usuário no modelo de recomendação:} Atualmente os dados relacionados a latitude e longitude do usuário são obtidos manualmente para a geração de rotas. Obter essa informação automaticamente é um passo para utilizar a localização na recomendação dos pontos turísticos mais próximos do usuário.
+    
+    \item \textbf{Melhoria das rotas:} Oferecer ao usuário a menor rota entre os pontos turísticos recomendados, ou tornar o ponto final da rota opcional, sugerindo outros pontos como o último destino do itinerário são passos para aperfeiçoar na geração de rotas para o turista. Além disso, ser possível definir a quantidade de pontos na rota a partir de um algoritmo para definir a quantidade baseada no comprimento da rota, duração, entre outros fatores.
+    
+    \item \textbf{Criar uma ontologia com base nas avaliações:} Durante essa pesquisa, verificou-se a limitação das APIs dos sistemas de informação quanto a obtenção de avaliações do usuário sobre determinado ponto. Além disso, cada um utiliza um vocabulário diferente na inserção de metadados nas páginas Web. A criação de uma ontologia capaz de agrupar todos esses dados é uma maneira de unificar todas as informações disponíveis em diferentes sistemas de informações.
+\end{itemize}
+
+\section{Sumário}
+
+Este capítulo apresentou um resumo de tudo que foi feito e discutido neste projeto. Mostrou-se as principais contribuições da nossa proposta de sistema de recomendação, os objetivos alcançados e os pontos de melhorias do nosso sistema de recomendação para os trabalhos futuros.
